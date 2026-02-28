@@ -14,12 +14,14 @@ else:
             scores.append(int(arg))
         except ValueError:
             print(f"Invalid score: '{arg}' is not a number – skipping\n")
-
-    print("Scores processed:", scores)
-    print("Total players:", len(scores))
-    print("Total score:", sum(scores))
-    print("Average score:", sum(scores)/len(scores))
-    print("High score:", max(scores))
-    print("Low score:", min(scores))
-    print("Score range:", max(scores)-min(scores))
-    print()
+    if scores:
+        print("Scores processed:", scores)
+        print("Total players:", len(scores))
+        print("Total score:", sum(scores))
+        print("Average score:", sum(scores)/len(scores))
+        print("High score:", max(scores))
+        print("Low score:", min(scores))
+        print("Score range:", max(scores)-min(scores))
+        print()
+    else:
+        print("No valid scores to analyze.")
