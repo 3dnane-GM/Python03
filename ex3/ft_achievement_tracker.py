@@ -61,6 +61,7 @@ achievements = {
     ],
 }
 
+
 def main():
     """function to rub the main program"""
     print("=== Achievement Tracker System ===\n")
@@ -89,7 +90,8 @@ def main():
     rare_achievement = set()
     for i, player in enumerate(all_achievements):
         others_union = set().union(*[all_achievements[j] for j
-                                     in range(len(all_achievements)) if j != i])
+                                     in range(len(all_achievements))
+                                     if j != i])
         rare_achievement |= player.difference(others_union)
 
     print("Rare achievements (1 player):", rare_achievement)
@@ -101,6 +103,7 @@ def main():
     print("Alice vs Bob common:", alice.intersection(bob))
     print("Alice unique:", alice.difference(*all_achievements[1:]))
     print("IceWard unique:", IceWard.difference(*all_achievements[:5]))
+
 
 if __name__ == "__main__":
     main()
