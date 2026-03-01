@@ -52,7 +52,7 @@ achievements = {
         "first_blood",
         "boss_hunter",
     ],
-    "Adnane": [
+    "IceWard": [
         "boss_hunter",
         "first_blood",
         "first_blood",
@@ -61,37 +61,46 @@ achievements = {
     ],
 }
 
-print("=== Achievement Tracker System ===\n")
+def main():
+    """function to rub the main program"""
+    print("=== Achievement Tracker System ===\n")
 
-for name, milestone in achievements.items():
-    print(f"Player {name} achievements:", set(milestone))
+    for name, milestone in achievements.items():
+        print(f"Player {name} achievements:", set(milestone))
 
-print()
+    print()
 
-all_achievements = [set(achievements[name]) for name in achievements]
+    all_achievements = [set(achievements[name]) for name in achievements]
 
-print("=== Achievement Analytics ===")
+    print("=== Achievement Analytics ===")
 
-unique_achievements = set.union(*all_achievements)
-print("All unique achievements:", unique_achievements)
-print("Total unique achievements:", len(unique_achievements))
-print()
+    unique_achievements = set.union(*all_achievements)
+    if len(unique_achievements) == 0:
+        unique_achievements = None
+    print("All unique achievements:", unique_achievements)
+    print("Total unique achievements:", len(unique_achievements))
+    print()
 
-common_achievements = set.intersection(*all_achievements)
-print("Common to all players:", common_achievements)
+    common_achievements = set.intersection(*all_achievements)
+    if len(common_achievements) == 0:
+        common_achievements = None
+    print("Common to all players:", common_achievements)
 
-rare_achievement = set()
-for i, player in enumerate(all_achievements):
-    others_union = set().union(*[all_achievements[j] for j
-                                 in range(len(all_achievements)) if j != i])
-    rare_achievement |= player.difference(others_union)
+    rare_achievement = set()
+    for i, player in enumerate(all_achievements):
+        others_union = set().union(*[all_achievements[j] for j
+                                     in range(len(all_achievements)) if j != i])
+        rare_achievement |= player.difference(others_union)
 
-print("Rare achievements (1 player):", rare_achievement)
-print()
+    print("Rare achievements (1 player):", rare_achievement)
+    print()
 
-alice = set(achievements["alice"])
-bob = set(achievements["bob"])
-Adnane = set(achievements["Adnane"])
-print("Alice vs Bob common:", alice.intersection(bob))
-print("Alice unique:", alice.difference(*all_achievements[1:]))
-print("Adnane unique:", Adnane.difference(*all_achievements[:5]))
+    alice = set(achievements["alice"])
+    bob = set(achievements["bob"])
+    IceWard = set(achievements["IceWard"])
+    print("Alice vs Bob common:", alice.intersection(bob))
+    print("Alice unique:", alice.difference(*all_achievements[1:]))
+    print("IceWard unique:", IceWard.difference(*all_achievements[:5]))
+
+if __name__ == "__main__":
+    main()
